@@ -1,14 +1,8 @@
-import counterTypes from './contacts-types';
+import { createAction } from '@reduxjs/toolkit';
 
-export const addField = value => ({
-  type: counterTypes.ADD,
-  payload: value,
-});
-export const removeField = value => ({
-  type: counterTypes.REMOVE,
-  payload: value,
-});
-export const setUpFilter = value => ({
-  type: counterTypes.SETFILTER,
-  payload: value,
-});
+const addField = createAction('phonebook/add');
+const removeField = createAction('phonebook/remove');
+const setUpFilter = createAction('phonebook/filter');
+
+const actions = { addField, removeField, setUpFilter };
+export default actions;

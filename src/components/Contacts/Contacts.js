@@ -4,9 +4,13 @@ import Input from '../Input';
 import ContactsList from '../ContactsList';
 import styles from './Contacts.module.css';
 import { connect } from 'react-redux';
-import * as actions from './../../redux/contacts/contacts-actions';
+import actions from './../../redux/contacts/contacts-actions';
 
-const Contacts = ({ title, filterFunction, handleFilter, contacts, removeItem }) => {
+const Contacts = ({ title, contacts, setFilter }) => {
+  const handleFilter = event => {
+    setFilter(event.currentTarget.value);
+  };
+
   return (
     <>
       <h2 className={styles.title}>{title}</h2>
@@ -16,10 +20,10 @@ const Contacts = ({ title, filterFunction, handleFilter, contacts, removeItem })
         name="filter"
         value={contacts.filter}
         handleInputChange={handleFilter}
-        // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
       />
-      <ContactsList contacts={filterFunction()} removeContact={removeItem} />
+      <ContactsList />
     </>
   );
 };
@@ -29,8 +33,6 @@ Contacts.defaultProps = {
 };
 Contacts.propTypes = {
   title: PropTypes.string,
-  filterFunction: PropTypes.func.isRequired,
-  handleFilter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -39,6 +41,7 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => ({
+  setFilter: value => dispatch(actions.setUpFilter(value)),
   removeItem: value => dispatch(actions.removeField(value)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Contacts);

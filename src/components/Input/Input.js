@@ -9,8 +9,8 @@ const Input = ({ type, name, pattern, title, value, handleInputChange, label }) 
       className={styles.input}
       type={type}
       name={name}
-      // pattern={pattern}
-      // title={title}
+      pattern={pattern}
+      title={title}
       required
       value={value}
       onChange={handleInputChange}
@@ -26,8 +26,8 @@ Input.defaultProps = {
 Input.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
-  // pattern: PropTypes.string.isRequired,
-  // title: PropTypes.string.isRequired,
+  pattern: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string,
